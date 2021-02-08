@@ -10,10 +10,7 @@ export class TareasService {
 
   constructor() { 
     
-    const lista1 = new Lista('recolectar priedras del infinito');
-    const lista2 = new Lista('heroes a desaparecer');
-
-    this.listas.push(lista1, lista2);
+    this.cargarStorage();
     
   }
 
@@ -21,7 +18,34 @@ export class TareasService {
 
     const nuevaLista = new Lista(titulo);
     this.listas.push(nuevaLista);
+    this.guardarStorage();
+
+    // devolvemos el id para poder tomarlo y hacer que la app abra la lista despues de creada.
+    return nuevaLista.id;
 
   }
+
+  obtenerLista( id: string | number ) {
+    
+    id = Number(id);
+
+    return this.listas.find( listaData => listaData.id === id);
+
+  }
+
+  guardarStorage() {
+    localStorage.setItem('data', JSON.stringify(this.listas));
+  }
+
+  cargarStorage() {
+    
+    if ( localStorage.getItem('data') ) {
+      this.listas =  JSON.parse(localStorage.getItem('data'));
+    } else {
+      this.listas = [];
+    }
+   
+  }
+
 
 }
