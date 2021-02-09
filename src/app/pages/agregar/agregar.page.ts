@@ -40,5 +40,25 @@ export class AgregarPage implements OnInit {
 
   }
 
+  cambioCheck( item: ListaItem ) {
+    
+    // cada vez que se cambien el estado del checkbox de una tarea, hay que verificar si todas las tareas estan terminadas
+    // y así poder dar la lista de tareas por finalizada
+    const pendientes = this.lista.items.filter( itemData => !itemData.completado ).length;
 
+    if ( pendientes === 0 ) {
+      this.lista.terminadaEn = new Date();
+      this.lista.terminada = true;
+    } else {
+      this.lista.terminadaEn = null;
+      this.lista.terminada = false;
+    }
+
+    this.tareaservice.guardarStorage();
+  }
+
+  borrarItem( i: number ) {
+    this.lista.items.splice(i, 1);
+    this.tareaservice.guardarStorage();
+  }
 }

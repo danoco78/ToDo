@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { TareasService } from '../../services/tareas.service';
+// import { Lista } from '../../Models/lista.model';
 
 @Component({
   selector: 'app-tab1',
