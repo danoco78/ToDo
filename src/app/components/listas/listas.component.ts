@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { TareasService } from '../../services/tareas.service';
 import { Lista } from '../../Models/lista.model';
-import { TareasService } from '../../services/tareas.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -9,7 +9,9 @@ import { TareasService } from '../../services/tareas.service'
   templateUrl: './listas.component.html',
   styleUrls: ['./listas.component.scss'],
 })
-export class ListasComponent implements OnInit {
+export class ListasComponent {
+
+  @Input() completadas = true;
 
   constructor( public tareasservice: TareasService,
                //private lista: Lista,
@@ -18,9 +20,21 @@ export class ListasComponent implements OnInit {
   ngOnInit() {}
 
   listaSeleccionada( lista: Lista ) {
-    
-    this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`)
 
+    if ( this.completadas === true ) {
+      
+      this.router.navigateByUrl(`/tabs/tab2/agregar/${ lista.id }`)
+
+    } else {
+
+      this.router.navigateByUrl(`/tabs/tab1/agregar/${ lista.id }`)
+
+    }
+
+  }
+
+  borrarLista( lista: Lista ) {
+    this.tareasservice.borrarLista( lista );
   }
 
 }

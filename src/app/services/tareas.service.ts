@@ -25,6 +25,14 @@ export class TareasService {
 
   }
 
+  borrarLista( lista: Lista ) {
+  
+    this.listas = this.listas.filter( listaData => listaData.id !== lista.id);
+
+    this.guardarStorage();
+
+  }
+
   obtenerLista( id: string | number ) {
     
     id = Number(id);
@@ -34,7 +42,9 @@ export class TareasService {
   }
 
   guardarStorage() {
+
     localStorage.setItem('data', JSON.stringify(this.listas));
+
   }
 
   cargarStorage() {
@@ -44,8 +54,10 @@ export class TareasService {
     } else {
       this.listas = [];
     }
-   
+  
   }
+
+
 
 
 }
