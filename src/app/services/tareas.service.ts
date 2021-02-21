@@ -25,6 +25,12 @@ export class TareasService {
 
   }
 
+  editarLista( lista: Lista, titulo: string ) {
+
+    let l = this.listas.filter( listaData => listaData.id !== lista.id )
+    this.guardarStorage();
+  }
+
   borrarLista( lista: Lista ) {
   
     this.listas = this.listas.filter( listaData => listaData.id !== lista.id);

@@ -24,6 +24,7 @@ export class Tab1Page {
         {
           name: 'titulo',
           type: 'text',
+          // value: 'texto' esta propiedad permite cargar valores por defecto a la alerta
           placeholder: "Nombre de la lista"
         }
       ],
